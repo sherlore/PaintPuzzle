@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "423662564336",
+    "firebase_url": "https://paintingpuzzle-e2e3b.firebaseio.com",
+    "project_id": "paintingpuzzle-e2e3b",
+    "storage_bucket": "paintingpuzzle-e2e3b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:423662564336:android:250b1ece5ab35688",
+        "android_client_info": {
+          "package_name": "com.MIR.PaintPuzzle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "423662564336-m6sh7jid8t8m0h5u4i86oktppes5vr2a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0HopAXFMR54BmZcd_gAsjsizcGydGrI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
