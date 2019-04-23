@@ -9,6 +9,8 @@ public class Layer : MonoBehaviour {
 	public Image myImg;
 	public Image myBg;
 	public Transform puzzle;
+	public Color colorSelected;
+	public Color colorNormal;
 
 	// Use this for initialization
 	void Start () {
@@ -95,9 +97,11 @@ public class Layer : MonoBehaviour {
 	public void IsFocused(bool val)
 	{
 		if(val)
-			myBg.color = Color.cyan;
+			// myBg.color = Color.cyan;
+			myBg.color = colorSelected;
 		else
-			myBg.color = Color.white;
+			// myBg.color = Color.white;
+			myBg.color = colorNormal;
 	}
 	
 }

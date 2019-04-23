@@ -535,7 +535,7 @@ public class PuzzleConsole : MonoBehaviour {
 		//Key input, no need to be block by mouse over UI
 		if(selectedPaint != null)
 		{
-			#if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_WEBGL
+			#if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX
 			Vector3 temp = Vector3.one * Input.GetAxis("Vertical") * Time.deltaTime * scaleSpeed;
 			if(selectedPaint.localScale.y + temp.y > 0.1f)
 			{ 
@@ -608,7 +608,7 @@ public class PuzzleConsole : MonoBehaviour {
 		
 		
 		
-		#if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_WEBGL
+		#if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX
 				
 		if(EventSystem.current.IsPointerOverGameObject()) return;
 		
