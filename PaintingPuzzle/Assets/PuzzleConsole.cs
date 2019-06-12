@@ -63,6 +63,9 @@ public class PuzzleConsole : MonoBehaviour {
 	IEnumerator loadProcess;
 	IEnumerator loadListProcess;
 	
+	public float btnScaling;
+	public float btnRotate;
+	
 	// Use this for initialization
 	void Start () {
 		PuzzleConsole.instance = gameObject;
@@ -319,7 +322,12 @@ public class PuzzleConsole : MonoBehaviour {
 		
 		for(int i=0; i<filePathes.Count; i++)
 		{
-			string url = filePathes[i];
+			
+			#if UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX
+				string url = "file://" + filePathes[i];
+			#else 
+				string url = filePathes[i];
+			#endif
 				
 			if(url.EndsWith(".png") )
 			{
@@ -529,6 +537,16 @@ public class PuzzleConsole : MonoBehaviour {
 		SetFocus(true);
 	}
 	
+	public void SetBtnScaling(float val)
+	{
+		btnScaling = val;
+	}
+	
+	public void SetBtnRotate(float val)
+	{
+		btnRotate = val;
+	}
+	
 	// Update is called once per frame
 	void Update () {
 		
@@ -536,13 +554,13 @@ public class PuzzleConsole : MonoBehaviour {
 		if(selectedPaint != null)
 		{
 			#if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX
-			Vector3 temp = Vector3.one * Input.GetAxis("Vertical") * Time.deltaTime * scaleSpeed;
+			Vector3 temp = Vector3.one * (Input.GetAxis("Vertical") + btnScaling) * Time.deltaTime * scaleSpeed;
 			if(selectedPaint.localScale.y + temp.y > 0.1f)
 			{ 
 				selectedPaint.localScale += temp;
 			}
 			
-			selectedPaint.Rotate(Vector3.forward * rotateSpeed * Time.deltaTime * Input.GetAxis("Horizontal"), Space.World);
+			selectedPaint.Rotate(Vector3.forward * rotateSpeed * Time.deltaTime * (Input.GetAxis("Horizontal") + btnRotate), Space.World);
 			
 			if(Input.GetButtonDown("Layer") )
 			{

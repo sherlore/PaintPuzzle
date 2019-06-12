@@ -18,6 +18,8 @@ public class BrowserTool : MonoBehaviour
     public int resHeight = 3300;
 	public int scale = 1;
 	public Text resText;
+	public float scrollRatio;
+	public GameObject hint;
 	
 	public void SetScale(string val)
 	{
@@ -95,10 +97,21 @@ public class BrowserTool : MonoBehaviour
 		resText.text = "" + resWidth + "*" + resHeight;
 	}
 	
+	public void FormatScrollRatio()
+	{
+		originRect.width = fullScreenRect.width * 0.7f * scrollRatio;
+		originRect.x = (1f-originRect.width)/2f;
+		
+		originRect.height = fullScreenRect.height * 0.7f * scrollRatio;
+		originRect.y = (1f-originRect.height)/2f;
+		canvasCam.rect = originRect;
+	}
+	
 	// Use this for initialization
 	void Start () {
 		SetResolutionHeight(Screen.height);
 		SetResolutionWidth(Screen.width);
+		hint.SetActive(false);
 		
 		try 
         {
@@ -127,11 +140,20 @@ public class BrowserTool : MonoBehaviour
 			}
 			fullScreenMode = !fullScreenMode;
 			ui.SetActive(!fullScreenMode);
+			hint.SetActive(fullScreenMode);
 		}
 		
 		if(fullScreenMode && Input.GetButtonDown("ScreenShot") )
 		{
 			ScreenShot();
+		}
+		
+		if(Input.GetButton("Ctrl") && Input.GetAxis("Mouse ScrollWheel") != 0f ) 
+		{
+			scrollRatio += Input.GetAxis("Mouse ScrollWheel");
+			
+			scrollRatio = Mathf.Max(scrollRatio, 0.1f);
+			FormatScrollRatio();
 		}
 	}
 	
@@ -145,6 +167,9 @@ public class BrowserTool : MonoBehaviour
 	
 	void ScreenShot()
 	{		
+	
+		hint.SetActive(false);
+	
 		screenShotCam.CopyFrom(canvasCam);
 		screenShotCam.rect = new Rect(0, 0, 1, 1);
 	
@@ -183,6 +208,9 @@ public class BrowserTool : MonoBehaviour
 		string filename = ScreenShotName(resWidth, resHeight);
 		System.IO.File.WriteAllBytes(filename, bytes);
 		Debug.Log(string.Format("Took screenshot to: {0}", filename));
+		
+		
+		hint.SetActive(true);
 	}
 	
 }
